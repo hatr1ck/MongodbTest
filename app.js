@@ -6,22 +6,23 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const Model = require('./models/model.js');
 
-mongoose.connect('mongodb://localhost/WTH');
+mongoose.connect('mongodb://localhost:27017/WTH');
 mongoose.Promise = global.Promise;
 app.use(bodyParser.json());
 /////////////////////////////////////////////////// 
 
 app.post('/add', function(req, res, next){
-  let add = new Model();
-  add.save();
-  console.log(req);
-  next();
+  let add = new Model(req.body);
+  add.save().then(
+    res.send("ALLAXYAKBAR")
+  );
+  console.log(add);
 })
 app.get('/add', function(req, res){
   res.send("SUCKS ASS");
 })
 app.get('/',function(req, res){
-  res.sendFile('C:/node/index.html');
+  res.sendFile('C:/mong/index.html');
 });
 
 
