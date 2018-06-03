@@ -8,13 +8,14 @@ const Model = require('./models/model.js');
 
 mongoose.connect('mongodb://localhost:27017/WTH');
 mongoose.Promise = global.Promise;
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended : true}));;
 /////////////////////////////////////////////////// 
 
 app.post('/add', function(req, res, next){
+  
   let add = new Model(req.body);
   add.save().then(
-    res.send("ALLAXYAKBAR")
+    res.send(req.body)
   );
   console.log(add);
 })
